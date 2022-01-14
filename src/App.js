@@ -1,21 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+        <p className="App-paragraph">
+            <b>NFTs that will be your subscription to some creative content platform></b><br/><br/>
+            ✅ you can resell your NFT , and your subscription.<br/>
+            ✅ platform and creatives will get royalties from reselling subscription.<br/>
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://discord.gg/39AMveCHKD"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Discord
         </a>
       </header>
     </div>
