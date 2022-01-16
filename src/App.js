@@ -47,15 +47,21 @@ function Home() {
         init()
     }, [])
 
-    const [filter] = useState([])
+    const [filter, network] = useState([])
 
     return (
         <div className="background-main">
             <div className="grid grid-cols-5 gap-6">
-                <div className="background-secondary ">
+                <div className="background-secondary">
                     <div>
-                        <div className="p-2 pt-10">
-                            <button className="btn btn-warning bg-amber-500" onClick={() => console.log("TBD")}>Connect your wallet</button>
+                        <div className="p-4 pt-10">
+                            <select class="select select-bordered select-warning w-full max-w-xs" onChange={(event) => console.log(event.target.value)}>
+                                <option>Polygon</option>
+                                <option>Harmony</option>
+                            </select>
+                            <br />
+                            <br />
+                            <button className="btn btn-warning w-full bg-amber-500" onClick={() => console.log("TBD")}>Connect your wallet</button>
                             <br />
                         </div>
                         <ul className="menu py-3">
@@ -105,7 +111,7 @@ function Home() {
                                         <img src="https://picsum.photos/id/1005/400/250" />
                                     </figure>
                                     <div className="card-body">
-                                        <h2 className="card-title">Top image
+                                        <h2 className="card-title">record.title
                                             <div className="badge mx-2 badge-secondary">NEW</div>
                                         </h2>
                                         <p>Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed molestiae voluptates incidunt iure sapiente.</p>
