@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ethers } from "ethers";
 import nftroadabi from "./nftroad.json"
 import './App.css';
@@ -48,7 +48,7 @@ function Home() {
         init()
     }, [])
 
-    const [filter, setFilter] = useState([]);
+    //const [filter, setFilter] = useState([]);
 
     const [walletConnected, setWalletConnected] = useState(0);
 
@@ -87,14 +87,14 @@ function Home() {
                                 #CUSTOMER
                             </li>
                             <li>
-                                <a>
-                                    <img className="pr-5" src="/resources/icons/AllCourses.svg" />
+                                <a href="/">
+                                    <img alt="" className="pr-5" src="/resources/icons/AllCourses.svg" />
                                     All courses
                                 </a>
                             </li>
                             <li>
-                                <a>
-                                    <img className="pr-5" src="/resources/icons/MyNFTs.svg" />
+                                <a href="/">
+                                    <img alt="" className="pr-5" src="/resources/icons/MyNFTs.svg" />
                                     My NFTs
                                 </a>
                             </li>
@@ -105,14 +105,14 @@ function Home() {
                                 #CREATOR
                             </li>
                             <li>
-                                <a>
-                                    <img className="pr-5" src="/resources/icons/MyCourses.svg" />
+                                <a href="/">
+                                    <img alt="" className="pr-5" src="/resources/icons/MyCourses.svg" />
                                     My courses
                                 </a>
                             </li>
                             <li>
                                 <a href="/create">
-                                    <img className="pr-5" src="/resources/icons/CreateCourse.svg" />
+                                    <img alt="" className="pr-5" src="/resources/icons/CreateCourse.svg" />
                                     Create course
                                 </a>
                             </li>
@@ -127,7 +127,7 @@ function Home() {
                         return (
                             <div className="card card-bordered background-secondary">
                                 <figure>
-                                    <img src={record.imageURL} />
+                                    <img alt="" src={record.imageURL} />
                                 </figure>
                                 <div className="card-body">
                                     <h2 className="card-title">record.title
