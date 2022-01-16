@@ -1,70 +1,8 @@
-# Getting Started with Create React App
+## Description
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+There are two types of users at NFTRoad platform: Content Creators and Customers. 
+Creator can upload their courses on NFTRoad and turn access to the course into NFTs with limited supply. In this way, Creators will get higher demand for their courses and will earn more money (royalties) from customers who will resell their NFTs (access to a course). Customers can buy any access to the course as NFT, and after they finish the course they can resell NFTs at a high price and gain not only new knowledge but additional income.
 
-## Available Scripts
+## How it's made
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The project consists of two parts: solidity smart contract and frontend hosted on netlify. Our customers sell subscriptions to courses as NFTs. It gives them a possibility of great marketing and distribution due to the fact that buyers can resell their NFTs and share royalty with them. It means that we have a set of semi-fungible tokens. To implement them we have used the ERC1155 standard. It allows to nicely represent all the courses on-chain and give users a way to easily purchase copies of each individual course. To go even further to simplify the technical side we have decided to make backed as lean as possible. To implement that we made two decisions: 1) we save all course data on the blockchain, luckily deployment to Polygon and Harmony allows us to do it 2) we save heavy user data, like course preview on the IPFS. Interesting solution was interaction with IPFS directly from the frontend side to upload user files and return a link to the image that is then written to the blockchain record as part of the course creation. The next important part is to secure unlockable content, for that part, we would need to implement a lean backend that would make sure that the user actually owns the wallet by asking the user to sign a nonce that is generated on the backend. https://docs.google.com/presentation/d/12PRkNElVTGxoSBhZauPGTkOlGJwV_Cp1jD9bpHn2D4k/edit?usp=sharing
