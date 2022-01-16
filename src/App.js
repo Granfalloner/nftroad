@@ -44,15 +44,6 @@ function Home() {
     init()
   }, [])
   
-  async function createRecord() {
-    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    // Prompt user for account connections
-    await provider.send("eth_requestAccounts", []);
-    const signer = provider.getSigner();
-    contract = contract.connect(signer)
-    await contract.createRecord(ethers.utils.parseEther('0.01'), 100);
-  }
-
   return (
       <div>
           <Header />
@@ -116,9 +107,19 @@ function Home() {
 }
 
 function Create() {
+  async function createRecord() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    // Prompt user for account connections
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    contract = contract.connect(signer)
+    await contract.createRecord(ethers.utils.parseEther('0.01'), 100);
+  }
+
   return (
     <div>
       <h4 className="text-lg text-center m-5">Sell Course</h4>
+      <button onClick={()=>createRecord(0.01, 100)}>Add Course(0.01 matic, 100 items)</button>
 
       <div>
       </div>
