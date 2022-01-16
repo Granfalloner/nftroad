@@ -48,7 +48,7 @@ function Home() {
         init()
     }, [])
 
-    //const [filter, setFilter] = useState([]);
+    const [filter, setFilter] = useState([]);
 
     const [walletConnected, setWalletConnected] = useState(0);
 
@@ -87,13 +87,13 @@ function Home() {
                                 #CUSTOMER
                             </li>
                             <li>
-                                <a href="/">
+                                <a className="text-white" href="/">
                                     <img alt="" className="pr-5" src="/resources/icons/AllCourses.svg" />
                                     All courses
                                 </a>
                             </li>
                             <li>
-                                <a href="/">
+                                <a className="text-white" href="/">
                                     <img alt="" className="pr-5" src="/resources/icons/MyNFTs.svg" />
                                     My NFTs
                                 </a>
@@ -105,13 +105,13 @@ function Home() {
                                 #CREATOR
                             </li>
                             <li>
-                                <a href="/">
+                                <a className="text-white" href="/">
                                     <img alt="" className="pr-5" src="/resources/icons/MyCourses.svg" />
                                     My courses
                                 </a>
                             </li>
                             <li>
-                                <a href="/create">
+                                <a className="text-white" href="/create">
                                     <img alt="" className="pr-5" src="/resources/icons/CreateCourse.svg" />
                                     Create course
                                 </a>
