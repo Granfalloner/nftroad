@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { ethers } from "ethers";
 import nftroadabi from "./nftroad.json"
 import './App.css';
@@ -66,6 +66,10 @@ function Home() {
         }
     }
 
+    function changeFilter() {
+
+    }
+
     return (
         <div className="background-main">
             <div className="grid grid-cols-5 gap-6">
@@ -86,17 +90,18 @@ function Home() {
                             <li className="menu-title text-sm p-4 text-amber-500">
                                 #CUSTOMER
                             </li>
-                            <li>
-                                <a className="text-white" href="/">
-                                    <img alt="" className="pr-5" src="/resources/icons/AllCourses.svg" />
+                            <li style={{display: 'block'}}>
+                                <img alt="" style={{display: 'inline'}} className="pl-5 pr-5" src="/resources/icons/AllCourses.svg" />
+                                <button className="text-white">
                                     All courses
-                                </a>
+                                </button>
                             </li>
-                            <li>
-                                <a className="text-white" href="/">
-                                    <img alt="" className="pr-5" src="/resources/icons/MyNFTs.svg" />
+                            <br /> 
+                            <li style={{display: 'block'}}>
+                                <img alt="" style={{display: 'inline'}} className="pl-5 pr-5" src="/resources/icons/MyNFTs.svg" />
+                                <button className="text-white">
                                     My NFTs
-                                </a>
+                                </button>
                             </li>
                         </ul>
 
@@ -104,17 +109,20 @@ function Home() {
                             <li className="menu-title p-4 text-amber-500">
                                 #CREATOR
                             </li>
-                            <li>
-                                <a className="text-white" href="/">
-                                    <img alt="" className="pr-5" src="/resources/icons/MyCourses.svg" />
+                            <li style={{display: 'block'}}>
+                                <img alt="" style={{display: 'inline'}} className="pl-5 pr-5" src="/resources/icons/MyCourses.svg" />
+                                <button className="text-white">
                                     My courses
-                                </a>
+                                </button>
                             </li>
-                            <li>
-                                <a className="text-white" href="/create">
-                                    <img alt="" className="pr-5" src="/resources/icons/CreateCourse.svg" />
-                                    Create course
-                                </a>
+                            <br />
+                            <li style={{display: 'block'}}>
+                                <img alt="" style={{display: 'inline'}} className="pl-5" src="/resources/icons/CreateCourse.svg" />
+                                <Link to="/create" style={{display: 'inline'}} className="pt-0">
+                                    <button className="text-white">
+                                        Create course
+                                    </button>
+                                </Link>
                             </li>
                         </ul>
                     </div>
