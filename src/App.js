@@ -13,10 +13,10 @@ const address = "0x2c9286f482e635009ed6eaaf478b84869493b0fb"
 let contract = new ethers.Contract(address, nftroadabi, provider);
 
 
-function Header() {
+function Footer() {
 
   return (
-      <header className="m-5 text-center">
+      <footer className="m-5 text-center">
         <p>
             <b>NFTs that will be your subscription to some creative content platform</b><br/><br/>
             ✅ you can resell your NFT , and your subscription.<br/>
@@ -30,7 +30,7 @@ function Header() {
         >
           Discord
         </a>
-      </header>
+      </footer>
   )
 }
 
@@ -47,21 +47,66 @@ function Home() {
   }, [])
   
   return (
-      <div>
-          <Header />
-          <div className="grid grid-cols-5 gap-4">
-              <div>
+      <div className="background-main">
+          <div className="grid grid-cols-5 gap-6">
+              <div className="background-secondary ">
                   <div>
-                      <div>
+                      <div className="p-2 pt-10">
+                          <button className="btn btn-warning bg-amber-500" onClick={() => console.log("TBD")}>Connect your wallet</button>
                           <br />
-                          Records: {JSON.stringify(records)}
                       </div>
+                      <ul className="menu py-3">
+                          <li className="menu-title text-sm p-4 text-amber-500">
+                              #CUSTOMER
+                          </li>
+                          <li>
+                              <a>
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 mr-2 stroke-current">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                  </svg>
+                                  All courses
+                              </a>
+                          </li>
+                          <li>
+                              <a>
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 mr-2 stroke-current">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                  </svg>
+                                  My NFTs
+                              </a>
+                          </li>
+                      </ul>
 
+                      <ul className="menu py-3">
+                          <li className="menu-title p-4 text-amber-500">
+                                #CREATOR
+                          </li>
+                          <li>
+                              <a>
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 mr-2 stroke-current">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                  </svg>
+                                  My courses
+                              </a>
+                          </li>
+                          <li>
+                              <a href="/create">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 mr-2 stroke-current">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                  </svg>
+                                  Create course
+                              </a>
+                          </li>
+                      </ul>
                   </div>
               </div>
 
-              <div className="grid grid-cols-3 col-span-4 gap-4">
-                  <div className="card card-bordered">
+              <div className="grid grid-cols-3 col-span-4 gap-6">
+                  <div className="card card-bordered background-secondary">
                       <figure>
                           <img src="https://picsum.photos/id/1005/400/250" />
                       </figure>
@@ -75,7 +120,10 @@ function Home() {
                           </div>
                       </div>
                   </div>
-                  <div className="card card-bordered">
+                  <div className="card card-bordered background-secondary">
+                      <figure>
+                          <img src="https://picsum.photos/id/1005/400/250" />
+                      </figure>
                       <div className="card-body">
                           <h2 className="card-title">Image bottom</h2>
                           <p>Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed molestiae voluptates incidunt iure sapiente.</p>
@@ -84,13 +132,10 @@ function Home() {
                               <button className="btn btn-ghost">Register</button>
                           </div>
                       </div>
-                      <figure>
-                          <img src="https://picsum.photos/id/1005/400/250" />
-                      </figure>
                   </div>
-                  <div className="card card-bordered">
+                  <div className="card card-bordered background-secondary">
                       <figure>
-                          <img src="https://picsum.photos/id/1005/60/40" class="w-full" />
+                          <img src="https://picsum.photos/id/1005/60/40"/>
                       </figure>
                       <div className="card-body">
                           <h2 className="card-title">Small image file</h2>
@@ -103,6 +148,7 @@ function Home() {
                   </div>
               </div>
           </div>
+          <Footer />
       </div>
   );
 }
