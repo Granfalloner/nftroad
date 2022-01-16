@@ -12,6 +12,10 @@ export default function Create({ contract }) {
   const [picture, setPicture] = useState(null);
   const [url, setURL] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState(undefined);
+  const [maxSupply, setMaxSupply] = useState(undefined);
 
   console.log(picture)
   const onDrop = async (pictures) => {
@@ -59,23 +63,23 @@ export default function Create({ contract }) {
       <div>
       <div>
         <div className="form-control">
-          <input type="text" placeholder="Title" className="input input-accent input-bordered" />
+          <input onChange={setTitle} type="text" placeholder="Title" className="input input-accent input-bordered" />
         </div>
       </div>
 
       <div className="form-control mt-5">
-        <textarea className="textarea h-24 textarea-bordered textarea-accent" placeholder="Description"></textarea>
+        <textarea onChange={setDescription} className="textarea h-24 textarea-bordered textarea-accent" placeholder="Description"></textarea>
       </div>
 
       <div>
         <div className="form-control mt-10">
-          <input type="number" placeholder="Supply" className="w-1/5 input-sm input input-accent input-bordered" />
+          <input onChange={setMaxSupply} type="number" min="0" step="1" placeholder="Supply" className="w-1/5 input-sm input input-accent input-bordered" />
         </div>
       </div>
 
       <div>
         <div className="form-control mt-1">
-          <input type="number" placeholder="Price" className="w-1/5 input-sm input input-accent input-bordered" />
+          <input onChange={setPrice} type="number" placeholder="Price" className="w-1/5 input-sm input input-accent input-bordered" />
         </div>
       </div>
       </div>
