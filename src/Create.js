@@ -42,8 +42,18 @@ export default function Create({ contract }) {
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
     contract = contract.connect(signer)
-    await contract.createRecord(ethers.utils.parseEther('0.01'), 100);
+
+    debugger;
+    const tx = await contract.createRecord(
+      maxSupply,
+      ethers.utils.parseEther('' + price),
+      title,
+      description,
+      url,
+    );
+    await tx.wait();
     setLoading(false)
+    alert(`Done. TX: ${JSON.stringify(tx)}`)
   }
 
   return (
@@ -63,23 +73,23 @@ export default function Create({ contract }) {
       <div>
       <div>
         <div className="form-control">
-          <input onChange={setTitle} type="text" placeholder="Title" className="input input-accent input-bordered" />
+          <input onChange={(e) => {setTitle(e.target.value)}} type="text" placeholder="Title" className="input input-accent input-bordered" />
         </div>
       </div>
 
       <div className="form-control mt-5">
-        <textarea onChange={setDescription} className="textarea h-24 textarea-bordered textarea-accent" placeholder="Description"></textarea>
+        <textarea onChange={(e) => {setDescription(e.target.value)}} className="textarea h-24 textarea-bordered textarea-accent" placeholder="Description"></textarea>
       </div>
 
       <div>
         <div className="form-control mt-10">
-          <input onChange={setMaxSupply} type="number" min="0" step="1" placeholder="Supply" className="w-1/5 input-sm input input-accent input-bordered" />
+          <input onChange={(e) => {setMaxSupply(e.target.value)}} type="number" min="0" step="1" placeholder="Supply" className="w-1/5 input-sm input input-accent input-bordered" />
         </div>
       </div>
 
       <div>
         <div className="form-control mt-1">
-          <input onChange={setPrice} type="number" placeholder="Price" className="w-1/5 input-sm input input-accent input-bordered" />
+          <input onChange={(e) => {setPrice(e.target.value)}} type="number" placeholder="Price" className="w-1/5 input-sm input input-accent input-bordered" />
         </div>
       </div>
       </div>
