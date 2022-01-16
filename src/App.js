@@ -4,6 +4,8 @@ import { ethers } from "ethers";
 import nftroadabi from "./nftroad.json"
 import './App.css';
 
+import Create from './Create.js'
+
 const provider = new ethers.providers.InfuraProvider(137, "3161b9b2a1d04bc4b1720629f18afd7d")
 
 const address = "0x2c9286f482e635009ed6eaaf478b84869493b0fb"
@@ -44,15 +46,6 @@ function Home() {
     init()
   }, [])
   
-  async function createRecord() {
-    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    // Prompt user for account connections
-    await provider.send("eth_requestAccounts", []);
-    const signer = provider.getSigner();
-    contract = contract.connect(signer)
-    await contract.createRecord(ethers.utils.parseEther('0.01'), 100);
-  }
-
   return (
       <div>
           <Header />
@@ -60,7 +53,6 @@ function Home() {
               <div>
                   <div>
                       <div>
-                          <button onClick={() => createRecord(0.01, 100)}>Add Course(0.01 matic, 100 items)</button>
                           <br />
                           Records: {JSON.stringify(records)}
                       </div>
@@ -115,23 +107,12 @@ function Home() {
   );
 }
 
-function Create() {
-  return (
-    <div>
-      <h4 className="text-lg text-center m-5">Sell Course</h4>
-
-      <div>
-      </div>
-    </div>
-  );
-}
-
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/create" element={<Create />} />
+        <Route path="/create" element={<Create contract={contract} />} />
       </Routes>
     </div>
   );
