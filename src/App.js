@@ -42,12 +42,29 @@ function Home() {
     useEffect(() => {
         async function init() {
             const result = await contract.viewRecords(20, 0)
+            // debugger
             setRecords(result.filter(x => x.maxSupply > 0))
         }
         init()
     }, [])
 
-    const [filter, network] = useState([])
+    const [filter, setFilter] = useState([]);
+
+    const [walletConnected, setWalletConnected] = useState(0);
+
+    async function connectWallet() {
+        const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        // Prompt user for account connections
+        try {
+            await provider.send("eth_requestAccounts", []);
+            const signer = provider.getSigner();
+            const address = await signer.getAddress();
+            setWalletConnected(address);
+        } catch (error) {
+            setWalletConnected(0);
+            console.error(error);
+        }
+    }
 
     return (
         <div className="background-main">
@@ -55,13 +72,14 @@ function Home() {
                 <div className="background-secondary">
                     <div>
                         <div className="p-4 pt-10">
-                            <select class="select select-bordered select-warning w-full max-w-xs" onChange={(event) => console.log(event.target.value)}>
+                            <select className="select select-bordered select-warning w-full max-w-xs" onChange={(event) => console.log(event.target.value)}>
                                 <option>Polygon</option>
                                 <option>Harmony</option>
                             </select>
                             <br />
                             <br />
-                            <button className="btn btn-warning w-full bg-amber-500" onClick={() => console.log("TBD")}>Connect your wallet</button>
+                            <p className="break-all text-amber-500 text-sm">{walletConnected ? `Wallet: ${walletConnected}` : ""}</p>
+                            <button className="btn btn-warning w-full bg-amber-500" onClick={connectWallet}>{walletConnected ? "Change wallet" : "Connect your wallet"}</button>
                             <br />
                         </div>
                         <ul className="menu py-3">
@@ -104,20 +122,20 @@ function Home() {
 
                 <div className="grid grid-cols-3 col-span-4 gap-6">
                     {records.map(record => {
+                        console.log(record);
+                        record.forEach(x => console.log(x));
                         return (
-                            <div className="grid grid-cols-3 col-span-4 gap-6">
-                                <div className="card card-bordered background-secondary">
-                                    <figure>
-                                        <img src="https://picsum.photos/id/1005/400/250" />
-                                    </figure>
-                                    <div className="card-body">
-                                        <h2 className="card-title">record.title
-                                            <div className="badge mx-2 badge-secondary">NEW</div>
-                                        </h2>
-                                        <p>Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed molestiae voluptates incidunt iure sapiente.</p>
-                                        <div className="justify-end card-actions">
-                                            <button className="btn btn-secondary">More info</button>
-                                        </div>
+                            <div className="card card-bordered background-secondary">
+                                <figure>
+                                    <img src={record.imageURL} />
+                                </figure>
+                                <div className="card-body">
+                                    <h2 className="card-title">record.title
+                                        <div className="badge mx-2 badge-warning text-amber-500">NEW</div>
+                                    </h2>
+                                    <p>record.description</p>
+                                    <div className="justify-end card-actions">
+                                        <button className="btn btn-warning bg-amber-500">Buy</button>
                                     </div>
                                 </div>
                             </div>
