@@ -34,7 +34,7 @@ function Header() {
 
 function Home() {
 
-  const [records, setRecords] = useState()
+  const [records, setRecords] = useState([])
 
   useEffect(() => {
     async function init() {
@@ -42,7 +42,7 @@ function Home() {
       setRecords(result.filter(x=>x.maxSupply > 0))
     }
     init()
-  })
+  }, [])
   
   async function createRecord() {
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -54,15 +54,64 @@ function Home() {
   }
 
   return (
-    <div>
-      <Header />
       <div>
-        <button onClick={()=>createRecord(0.01, 100)}>Add Course(0.01 matic, 100 items)</button>
-        <br/>
-        Records: {JSON.stringify(records)}
-      </div>
+          <Header />
+          <div className="grid grid-cols-5 gap-4">
+              <div>
+                  <div>
+                      <div>
+                          <button onClick={() => createRecord(0.01, 100)}>Add Course(0.01 matic, 100 items)</button>
+                          <br />
+                          Records: {JSON.stringify(records)}
+                      </div>
 
-    </div>
+                  </div>
+              </div>
+
+              <div className="grid grid-cols-3 col-span-4 gap-4">
+                  <div className="card card-bordered">
+                      <figure>
+                          <img src="https://picsum.photos/id/1005/400/250" />
+                      </figure>
+                      <div className="card-body">
+                          <h2 className="card-title">Top image
+                              <div className="badge mx-2 badge-secondary">NEW</div>
+                          </h2>
+                          <p>Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed molestiae voluptates incidunt iure sapiente.</p>
+                          <div className="justify-end card-actions">
+                              <button className="btn btn-secondary">More info</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div className="card card-bordered">
+                      <div className="card-body">
+                          <h2 className="card-title">Image bottom</h2>
+                          <p>Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed molestiae voluptates incidunt iure sapiente.</p>
+                          <div className="card-actions">
+                              <button className="btn btn-primary">Login</button>
+                              <button className="btn btn-ghost">Register</button>
+                          </div>
+                      </div>
+                      <figure>
+                          <img src="https://picsum.photos/id/1005/400/250" />
+                      </figure>
+                  </div>
+                  <div className="card card-bordered">
+                      <figure>
+                          <img src="https://picsum.photos/id/1005/60/40" class="w-full" />
+                      </figure>
+                      <div className="card-body">
+                          <h2 className="card-title">Small image file</h2>
+                          <p>Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed molestiae voluptates incidunt iure sapiente.</p>
+                          <div className="card-actions">
+                              <div className="badge badge-ghost">Article</div>
+                              <div className="badge badge-ghost">Photography</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
   );
 }
 
