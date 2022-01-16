@@ -8,7 +8,7 @@ import Create from './Create.js'
 
 const provider = new ethers.providers.InfuraProvider(137, "3161b9b2a1d04bc4b1720629f18afd7d")
 
-const address = "0x2c9286f482e635009ed6eaaf478b84869493b0fb"
+const address = "0x8B204E9349885bCd7cB1ef0208Ee736a78fc082D"
 
 let contract = new ethers.Contract(address, nftroadabi, provider);
 
