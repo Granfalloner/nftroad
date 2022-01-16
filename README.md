@@ -1,3 +1,5 @@
+<img width="1680" alt="Screenshot 2022-01-16 at 20 55 59" src="https://user-images.githubusercontent.com/2920662/149673843-1f1d574c-7e27-4b74-b7f7-b726d799d6bd.png">
+
 ## Description
 
 There are two types of users at NFTRoad platform: Content Creators and Customers. 
