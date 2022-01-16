@@ -128,7 +128,7 @@ function Home() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-3 col-span-4 gap-6">
+                <div className="grid grid-cols-3 col-span-4 gap-6 pt-10">
                     {records.map(record => {
                         console.log(record);
                         record.forEach(x => console.log(x));
@@ -138,10 +138,10 @@ function Home() {
                                     <img alt="" src={record.imageURL} />
                                 </figure>
                                 <div className="card-body">
-                                    <h2 className="card-title">record.title
+                                    <h2 className="card-title">{record.title}
                                         <div className="badge mx-2 badge-warning text-amber-500">NEW</div>
                                     </h2>
-                                    <p>record.description</p>
+                                    <p>{record.description}</p>
                                     <div className="justify-end card-actions">
                                         <button className="btn btn-warning bg-amber-500">Buy</button>
                                     </div>
