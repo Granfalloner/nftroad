@@ -43,7 +43,7 @@ export default function Create({ contract }) {
     const signer = provider.getSigner();
     contract = contract.connect(signer)
 
-    debugger;
+    // debugger;
     const tx = await contract.createRecord(
       maxSupply,
       ethers.utils.parseEther('' + price),
@@ -73,28 +73,28 @@ export default function Create({ contract }) {
       <div>
       <div>
         <div className="form-control">
-          <input onChange={(e) => {setTitle(e.target.value)}} type="text" placeholder="Title" className="input input-accent input-bordered" />
+          <input onChange={(e) => {setTitle(e.target.value)}} type="text" placeholder="Title" className="input input-warning input-bordered" />
         </div>
       </div>
 
       <div className="form-control mt-5">
-        <textarea onChange={(e) => {setDescription(e.target.value)}} className="textarea h-24 textarea-bordered textarea-accent" placeholder="Description"></textarea>
+        <textarea onChange={(e) => {setDescription(e.target.value)}} className="textarea h-24 textarea-bordered textarea-warning" placeholder="Description"></textarea>
       </div>
 
       <div>
         <div className="form-control mt-10">
-          <input onChange={(e) => {setMaxSupply(e.target.value)}} type="number" min="0" step="1" placeholder="Supply" className="w-1/5 input-sm input input-accent input-bordered" />
+          <input onChange={(e) => {setMaxSupply(e.target.value)}} type="number" min="0" step="1" placeholder="Supply" className="w-1/5 input-sm input input-warning input-bordered" />
         </div>
       </div>
 
       <div>
         <div className="form-control mt-1">
-          <input onChange={(e) => {setPrice(e.target.value)}} type="number" placeholder="Price" className="w-1/5 input-sm input input-accent input-bordered" />
+          <input onChange={(e) => {setPrice(e.target.value)}} type="number" placeholder="Price" className="w-1/5 input-sm input input-warning input-bordered" />
         </div>
       </div>
       </div>
 
-      <button onClick={createRecord} className={`mt-5 btn btn-block btn-primary ${loading ? 'loading disabled': ''}`}>Create Course</button> 
+      <button onClick={createRecord} className={`mt-5 btn btn-block btn-warning ${loading ? 'loading disabled': ''}`}>Create Course</button> 
 
     </div>
   );

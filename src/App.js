@@ -42,13 +42,12 @@ function Home() {
     useEffect(() => {
         async function init() {
             const result = await contract.viewRecords(20, 0)
-            // debugger
             setRecords(result.filter(x => x.maxSupply > 0))
         }
         init()
     }, [])
 
-    const [filter, setFilter] = useState([]);
+    const [filter, setFilter] = useState(0);
 
     const [walletConnected, setWalletConnected] = useState(0);
 
@@ -64,10 +63,6 @@ function Home() {
             setWalletConnected(0);
             console.error(error);
         }
-    }
-
-    function changeFilter() {
-
     }
 
     return (
@@ -92,14 +87,14 @@ function Home() {
                             </li>
                             <li style={{display: 'block'}}>
                                 <img alt="" style={{display: 'inline'}} className="pl-5 pr-5" src="/resources/icons/AllCourses.svg" />
-                                <button className="text-white">
+                                <button className="text-white" onClick={() => setFilter(0)}>
                                     All courses
                                 </button>
                             </li>
                             <br /> 
                             <li style={{display: 'block'}}>
                                 <img alt="" style={{display: 'inline'}} className="pl-5 pr-5" src="/resources/icons/MyNFTs.svg" />
-                                <button className="text-white">
+                                <button className="text-white" onClick={() => setFilter(1)}>
                                     My NFTs
                                 </button>
                             </li>
@@ -111,7 +106,7 @@ function Home() {
                             </li>
                             <li style={{display: 'block'}}>
                                 <img alt="" style={{display: 'inline'}} className="pl-5 pr-5" src="/resources/icons/MyCourses.svg" />
-                                <button className="text-white">
+                                <button className="text-white" onClick={() => setFilter(2)}>
                                     My courses
                                 </button>
                             </li>
@@ -129,9 +124,18 @@ function Home() {
                 </div>
 
                 <div className="grid grid-cols-3 col-span-4 gap-6 pt-10">
-                    {records.map(record => {
-                        console.log(record);
-                        record.forEach(x => console.log(x));
+                    {records
+                        .filter(record => {
+                            console.log(record);
+                            // debugger;
+                            switch (filter) {
+                                case 0: return true;
+                                case 1: return false;
+                                case 2: return record.owner == walletConnected;
+                                default: return true;
+                            }
+                        })
+                        .map(record => {
                         return (
                             <div className="card card-bordered background-secondary">
                                 <figure>
