@@ -14,7 +14,6 @@ let contract = new ethers.Contract(address, nftroadabi, provider);
 
 
 function Footer() {
-
     return (
         <footer className="m-5 text-center">
             <p>
@@ -35,6 +34,42 @@ function Footer() {
     )
 }
 
+function WalletInfo(props) {
+    return (
+        <div className="p-4 pt-10">
+            <select className="select select-bordered select-warning w-full max-w-xs"
+                onChange={(event) => console.log(event.target.value)}>
+                <option>Polygon</option>
+                <option>Harmony</option>
+            </select>
+            <br />
+            <br />
+            <p className="break-all text-amber-500 text-sm">{props.walletConnected ? `Wallet: ${props.walletConnected}` : ""}</p>
+            <button className="btn btn-warning w-full bg-amber-500" onClick={props.connectWallet}>{props.walletConnected ? "Change wallet" : "Connect your wallet"}</button>
+            <br />
+        </div>
+    )
+}
+
+function CourseCard(props) {
+    return (
+        <div className="card card-bordered background-secondary">
+            <figure>
+                <img alt="" src={props.record.imageURL} />
+            </figure>
+            <div className="card-body">
+                <h2 className="card-title text-white">{props.record.title}
+                    <div className="badge mx-2 badge-warning text-amber-500">NEW</div>
+                </h2>
+                <p className="text-white">{props.record.description}</p>
+                <div className="justify-end card-actions">
+                    <button className="btn btn-warning bg-amber-500">Buy</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 function Home() {
 
     const [records, setRecords] = useState([])
@@ -46,8 +81,6 @@ function Home() {
         }
         init()
     }, [])
-
-    const [filter, setFilter] = useState(0);
 
     const [walletConnected, setWalletConnected] = useState(0);
 
@@ -65,22 +98,14 @@ function Home() {
         }
     }
 
+    const [filter, setFilter] = useState(0);
+
     return (
         <div className="background-main">
             <div className="grid grid-cols-5 gap-6">
                 <div className="background-secondary">
                     <div>
-                        <div className="p-4 pt-10">
-                            <select className="select select-bordered select-warning w-full max-w-xs" onChange={(event) => console.log(event.target.value)}>
-                                <option>Polygon</option>
-                                <option>Harmony</option>
-                            </select>
-                            <br />
-                            <br />
-                            <p className="break-all text-amber-500 text-sm">{walletConnected ? `Wallet: ${walletConnected}` : ""}</p>
-                            <button className="btn btn-warning w-full bg-amber-500" onClick={connectWallet}>{walletConnected ? "Change wallet" : "Connect your wallet"}</button>
-                            <br />
-                        </div>
+                        <WalletInfo walletConnected={walletConnected} connectWallet={connectWallet} />
                         <ul className="menu py-3">
                             <li className="menu-title text-sm p-4 text-amber-500">
                                 #CUSTOMER
@@ -124,10 +149,10 @@ function Home() {
                 </div>
 
                 <div className="grid grid-cols-3 col-span-4 gap-6 pt-10">
-                    {records
+                    {
+                        records
                         .filter(record => {
-                            console.log(record);
-                            // debugger;
+                            if (!record.active) { return false; }
                             switch (filter) {
                                 case 0: return true;
                                 case 1: return false;
@@ -135,24 +160,7 @@ function Home() {
                                 default: return true;
                             }
                         })
-                        .map(record => {
-                        return (
-                            <div className="card card-bordered background-secondary">
-                                <figure>
-                                    <img alt="" src={record.imageURL} />
-                                </figure>
-                                <div className="card-body">
-                                    <h2 className="card-title">{record.title}
-                                        <div className="badge mx-2 badge-warning text-amber-500">NEW</div>
-                                    </h2>
-                                    <p>{record.description}</p>
-                                    <div className="justify-end card-actions">
-                                        <button className="btn btn-warning bg-amber-500">Buy</button>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })
+                        .map(record => <CourseCard record={record} />)
                     }
                 </div>
             </div>
