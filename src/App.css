@@ -9,3 +9,15 @@
 p, a {
     color: white;
 }
+
+.text-white {
+    color: white;
+}
+
+.side-menu li {
+    display: inline-block;
+}
+
+.side-menu li img {
+    display: inline-block;
+}

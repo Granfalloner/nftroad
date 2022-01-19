@@ -13,8 +13,82 @@ const address = "0x8B204E9349885bCd7cB1ef0208Ee736a78fc082D"
 let contract = new ethers.Contract(address, nftroadabi, provider);
 
 
-function Footer() {
+function WalletInfo(props) {
+    return (
+        <div className="p-4 pt-10">
+            <select className="select select-bordered select-warning w-full max-w-xs"
+                onChange={(event) => console.log(event.target.value)}>
+                <option>Polygon</option>
+                <option>Harmony</option>
+            </select>
+            <br />
+            <br />
+            <p className="break-all text-amber-500 text-sm">{props.walletConnected ? `Wallet: ${props.walletConnected}` : ""}</p>
+            <button className="btn btn-warning w-full bg-amber-500" onClick={props.connectWallet}>{props.walletConnected ? "Change wallet" : "Connect your wallet"}</button>
+            <br />
+        </div>
+    )
+}
 
+function MenuItem(props) {
+    return (
+        <li>
+            <img alt="" className="pl-5 pr-5" src={props.image} />
+            <button className="text-white" onClick={() => props.setFilter(props.value)}>
+                {props.title}
+            </button>
+        </li>
+    )
+}
+
+function CustomerMenu(props) {
+    return (
+        <ul className="side-menu menu py-3">
+            <li className="menu-title text-sm p-4 text-amber-500">
+                #CUSTOMER
+            </li>
+            <MenuItem title="All courses" image="/resources/icons/AllCourses.svg" setFilter={() => props.setFilter(0)} />
+            <br />
+            <MenuItem title="My NFTs" image="/resources/icons/MyNFTs.svg" setFilter={() => props.setFilter(1)} />
+        </ul>
+    )
+}
+
+function CreatorMenu(props) {
+    return (
+        <ul className="side-menu menu py-3">
+            <li className="menu-title p-4 text-amber-500">
+                #CREATOR
+            </li>
+            <MenuItem title="My courses" image="/resources/icons/MyCourses.svg" setFilter={() => props.setFilter(2)} />
+            <br />
+            <Link to="/create">
+                <MenuItem title="Create course" image="/resources/icons/CreateCourse.svg" setFilter={() => {}} />
+            </Link>
+        </ul>
+    )
+}
+
+function CourseCard(props) {
+    return (
+        <div className="card card-bordered background-secondary">
+            <figure>
+                <img alt="" src={props.record.imageURL} />
+            </figure>
+            <div className="card-body">
+                <h2 className="card-title text-white">{props.record.title}
+                    <div className="badge mx-2 badge-warning text-amber-500">NEW</div>
+                </h2>
+                <p className="text-white">{props.record.description}</p>
+                <div className="justify-end card-actions">
+                    <button className="btn btn-warning bg-amber-500">Buy</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function Footer() {
     return (
         <footer className="m-5 text-center">
             <p>
@@ -47,8 +121,6 @@ function Home() {
         init()
     }, [])
 
-    const [filter, setFilter] = useState(0);
-
     const [walletConnected, setWalletConnected] = useState(0);
 
     async function connectWallet() {
@@ -65,69 +137,22 @@ function Home() {
         }
     }
 
+    const [filter, setFilter] = useState(0);
+
     return (
         <div className="background-main">
             <div className="grid grid-cols-5 gap-6">
                 <div className="background-secondary">
-                    <div>
-                        <div className="p-4 pt-10">
-                            <select className="select select-bordered select-warning w-full max-w-xs" onChange={(event) => console.log(event.target.value)}>
-                                <option>Polygon</option>
-                                <option>Harmony</option>
-                            </select>
-                            <br />
-                            <br />
-                            <p className="break-all text-amber-500 text-sm">{walletConnected ? `Wallet: ${walletConnected}` : ""}</p>
-                            <button className="btn btn-warning w-full bg-amber-500" onClick={connectWallet}>{walletConnected ? "Change wallet" : "Connect your wallet"}</button>
-                            <br />
-                        </div>
-                        <ul className="menu py-3">
-                            <li className="menu-title text-sm p-4 text-amber-500">
-                                #CUSTOMER
-                            </li>
-                            <li style={{display: 'block'}}>
-                                <img alt="" style={{display: 'inline'}} className="pl-5 pr-5" src="/resources/icons/AllCourses.svg" />
-                                <button className="text-white" onClick={() => setFilter(0)}>
-                                    All courses
-                                </button>
-                            </li>
-                            <br /> 
-                            <li style={{display: 'block'}}>
-                                <img alt="" style={{display: 'inline'}} className="pl-5 pr-5" src="/resources/icons/MyNFTs.svg" />
-                                <button className="text-white" onClick={() => setFilter(1)}>
-                                    My NFTs
-                                </button>
-                            </li>
-                        </ul>
-
-                        <ul className="menu py-3">
-                            <li className="menu-title p-4 text-amber-500">
-                                #CREATOR
-                            </li>
-                            <li style={{display: 'block'}}>
-                                <img alt="" style={{display: 'inline'}} className="pl-5 pr-5" src="/resources/icons/MyCourses.svg" />
-                                <button className="text-white" onClick={() => setFilter(2)}>
-                                    My courses
-                                </button>
-                            </li>
-                            <br />
-                            <li style={{display: 'block'}}>
-                                <img alt="" style={{display: 'inline'}} className="pl-5" src="/resources/icons/CreateCourse.svg" />
-                                <Link to="/create" style={{display: 'inline'}} className="pt-0">
-                                    <button className="text-white">
-                                        Create course
-                                    </button>
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
+                    <WalletInfo walletConnected={walletConnected} connectWallet={connectWallet} />
+                    <CustomerMenu setFilter={setFilter} />
+                    <CreatorMenu setFilter={setFilter} />
                 </div>
 
                 <div className="grid grid-cols-3 col-span-4 gap-6 pt-10">
-                    {records
+                    {
+                        records
+                        .filter(record => record.active)
                         .filter(record => {
-                            console.log(record);
-                            // debugger;
                             switch (filter) {
                                 case 0: return true;
                                 case 1: return false;
@@ -135,24 +160,7 @@ function Home() {
                                 default: return true;
                             }
                         })
-                        .map(record => {
-                        return (
-                            <div className="card card-bordered background-secondary">
-                                <figure>
-                                    <img alt="" src={record.imageURL} />
-                                </figure>
-                                <div className="card-body">
-                                    <h2 className="card-title">{record.title}
-                                        <div className="badge mx-2 badge-warning text-amber-500">NEW</div>
-                                    </h2>
-                                    <p>{record.description}</p>
-                                    <div className="justify-end card-actions">
-                                        <button className="btn btn-warning bg-amber-500">Buy</button>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })
+                        .map(record => <CourseCard record={record} />)
                     }
                 </div>
             </div>
