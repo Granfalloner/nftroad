@@ -163,7 +163,7 @@ function Home() {
 
 function App() {
     return (
-        <div className="App">
+        <div id="app" className="App">
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/create" element={<Create contract={contract} />} />

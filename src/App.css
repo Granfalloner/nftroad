@@ -1,15 +1,11 @@
 .background-main {
-    background-color: #1B1A1D;
+    background-color: var(--background-main);
 }
 
 .background-secondary {
-    background-color: #28272B;
+    background-color: var(--background-secondary);
 }
 
-.background-red {
-    background-color: red;
-}
-
-a {
+p, a {
     color: white;
 }
